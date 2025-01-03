@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Perpustakaan</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+    
+        /* Header Styling */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+        }
+        header img {
+            height: 50px;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+        nav ul li {
+            margin-left: 20px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+        nav ul li a.active {
+            border-bottom: 2px solid yellow;
+        }
+    
+        /* Footer Styling */
+        footer {
+            text-align: center;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    
+        /* Content Styling */
+        .content {
+            padding: 20px;
+            display: none;
+        }
+        .content.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+    
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    
+        /* Form and Table Styling */
+        form {
+            display: flex;
+            flex-direction: column;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        form input, form select, form button {
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 1rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+        table th {
+            background-color: #f2f2f2;
+        }
+    
+        /* Responsiveness */
+        @media (max-width: 1024px) {
+            header {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            header img {
+                margin-bottom: 10px;
+            }
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            nav ul li {
+                margin: 5px 10px;
+            }
+        }
+    
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            nav ul li {
+                margin: 10px 0;
+            }
+            footer {
+                position: static;
+            }
+        }
+    
+        @media (max-width: 480px) {
+            body {
+                font-size: 14px;
+            }
+            form input, form select, form button {
+                font-size: 0.9rem;
+            }
+            table th, table td {
+                padding: 5px;
+            }
+            header img {
+                height: 40px;
+            }
+        }
+    </style>
+    
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <img src="logo.png" alt="Logo Aplikasi">
+        <nav>
+            <ul>
+                <li><a href="#beranda" data-target="beranda" class="menu-link active">Beranda</a></li>
+                <li><a href="#transaksi" data-target="transaksi" class="menu-link">Transaksi</a></li>
+                <li><a href="#profil" data-target="profil" class="menu-link">Profil</a></li>
+                <li><a href="#login" data-target="login" class="menu-link">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Halaman Beranda -->
+    <div id="beranda" class="content active">
+        <h1>Selamat Datang di Aplikasi Perpustakaan</h1>
+        <p>Langkah menggunakan aplikasi:</p>
+        <ol>
+            <li>Login ke aplikasi melalui menu "Login".</li>
+            <li>Lakukan transaksi peminjaman buku di halaman "Transaksi".</li>
+            <li>Lihat daftar transaksi Anda di halaman "Daftar Transaksi".</li>
+        </ol>
+    </div>
+
+    <!-- Halaman Transaksi -->
+    <div id="transaksi" class="content">
+        <h2>Form Transaksi</h2>
+        <form onsubmit="return validateForm()">
+            <label for="namaTransaksi">Nama Transaksi:</label>
+            <input type="text" id="namaTransaksi" name="namaTransaksi">
+
+            <label for="jumlah">Jumlah:</label>
+            <input type="number" id="jumlah" name="jumlah">
+
+            <label for="kategori">Kategori:</label>
+            <select id="kategori" name="kategori">
+                <option value="">Pilih Kategori</option>
+                <option value="Peminjaman">Peminjaman</option>
+                <option value="Pengembalian">Pengembalian</option>
+            </select>
+
+            <button type="submit">Simpan</button>
+        </form>
+
+        <h2>Daftar Transaksi</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nama Transaksi</th>
+                    <th>Jumlah</th>
+                    <th>Kategori</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Peminjaman Buku</td>
+                    <td>1</td>
+                    <td>Peminjaman</td>
+                </tr>
+                <tr>
+                    <td>Pengembalian Buku</td>
+                    <td>2</td>
+                    <td>Pengembalian</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Halaman Profil -->
+    <div id="profil" class="content">
+        <h2>Profil Aplikasi</h2>
+        <p>Aplikasi Perpustakaan ini dirancang untuk memudahkan pengelolaan transaksi peminjaman dan pengembalian buku di perpustakaan. Dengan fitur yang sederhana, pengguna dapat dengan mudah mencatat, melihat, dan mengelola data transaksi mereka.</p>
+    </div>
+
+    <!-- Halaman Login -->
+    <div id="login" class="content">
+        <h2>Login</h2>
+        <form>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username">
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password">
+
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2025 Aplikasi Perpustakaan - All Rights Reserved
+    </footer>
+
+    <script>
+        // Form Validation Script for Transaksi Page
+        function validateForm() {
+            const namaTransaksi = document.getElementById('namaTransaksi').value;
+            const jumlah = document.getElementById('jumlah').value;
+            const kategori = document.getElementById('kategori').value;
+
+            if (!namaTransaksi || !jumlah || !kategori) {
+                alert('Harap isi semua kolom!');
+                return false;
+            }
+            return true;
+        }
+
+        // Menu Navigation Highlight and Content Display
+        const menuLinks = document.querySelectorAll('.menu-link');
+        const contents = document.querySelectorAll('.content');
+
+        menuLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = link.dataset.target;
+
+                // Remove active class from all links and contents
+                menuLinks.forEach(l => l.classList.remove('active'));
+                contents.forEach(content => content.classList.remove('active'));
+
+                // Add active class to clicked link and corresponding content
+                link.classList.add('active');
+                document.getElementById(target).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
